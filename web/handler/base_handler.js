@@ -8,15 +8,16 @@ var q = require('q');
 module.exports = function(req, res, next) {
     // 回html
     res.html_response = function(template_name, cache, context) {
-        if (cache) {
-            res.set('Cache-Control', 'public, max-age=86400');
-        } else {
-            res.set('Cache-Control', 'no-store, no-cache');
-        }
-        res.set({
-            'Date': new Date(),
-            'Content-Type': 'text/html; charset=utf-8'
-        });
+        // if (cache) {
+        //     res.set('Cache-Control', 'public, max-age=86400');
+        // } else {
+        //     res.set('Cache-Control', 'no-store, no-cache');
+        // }
+        console.log(123123);
+        // res.set({
+        //     'Date': new Date(),
+        //     'Content-Type': 'text/html; charset=utf-8'
+        // });
 
         res.render(template_name, context, function(err, html) {
             res.send(html);
@@ -28,7 +29,6 @@ module.exports = function(req, res, next) {
         data = data || '';
 
         res.set({
-            'Date': new Date(),
             'Cache-Control': 'private',
             'Content-Type': 'application/json; charset=utf-8',
             'Access-Control-Allow-Origin': '*'

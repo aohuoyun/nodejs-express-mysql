@@ -26,10 +26,10 @@ if (env == 'development') {
 
     // DB
     config.db = {
-        name: 'demotable',
+        name: 'nodejs_test',
         host: 'localhost',
         user: 'root',
-        passwd: 'root',
+        passwd: '',
         port: 3306
     };
 } else if (env == 'production') {
