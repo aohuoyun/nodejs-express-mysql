@@ -1,7 +1,6 @@
 /**
- * Created by aresn on 16/5/11.
+ * Created by aohuoyun on 19/02/20.
  */
-
 var env = require('./env');
 
 var config = {
