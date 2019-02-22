@@ -56,7 +56,6 @@ app.use(function (req, res, next) {
 var static_opts = {
     maxAge: 31536999999
 };
-console.log(path.join(__dirname, 'static'));
 app.use(express.static( path.join(__dirname, 'static'), static_opts ));
 
 app.use(render);
