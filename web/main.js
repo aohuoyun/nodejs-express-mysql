@@ -13,6 +13,7 @@ var config = require('.././config/config');
 
 var sign = require('./handler/sign_handler');
 var user = require('./handler/user_handler');
+var category = require('./handler/category_handler');
 var app = express();
 var bodyParser = require('body-parser');
 
@@ -21,8 +22,8 @@ var bodyParser = require('body-parser');
  */
 app.use(compression());
 
-app.set('views', path.join(__dirname, './template'));
-app.set('view engine', 'ejs');
+// app.set('views', path.join(__dirname, './template'));
+// app.set('view engine', 'ejs');
 app.use(logger("web"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -62,6 +63,7 @@ app.use(render);
 
 app.use('/', sign.routes);
 app.use('/user', user);
+app.use('/category',category);
 
 app.get("*", function(req, res) {
     res.status(404).end("404");

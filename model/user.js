@@ -1,37 +1,24 @@
 /**
  * Created by aohuoyun on 19/02/20.
  */
-var Sequelize = require('sequelize');
-var config = require('.././config/config');
-var BaseModel = require('./base');
 
-var sequelize = new Sequelize(
-    config.db.name,
-    config.db.user,
-    config.db.passwd,
-    {
-        'dialect': 'mysql',
-        'host': config.db.host,
-        'port': config.db.port
-    }
-);
+var BaseModelConfig= require('./base');
 
-var User = sequelize.define('user', {
+var User = BaseModelConfig.sequelize.define('user', {
     id: {
-        type: Sequelize.BIGINT,
+        type: BaseModelConfig.sequelizeinit.BIGINT,
         primaryKey: true,
-        defaultValue: BaseModel.uid()
     },
     mail: {
-        type: Sequelize.STRING(50),
+        type: BaseModelConfig.sequelizeinit.STRING(50),
         allowNull: false
     },
     passwd: {
-        type: Sequelize.STRING(20),
+        type: BaseModelConfig.sequelizeinit.STRING(20),
         allowNull: false
     },
     name: {
-        type: Sequelize.STRING(20),
+        type: BaseModelConfig.sequelizeinit.STRING(20),
         allowNull: true
     }
 }, {
@@ -49,7 +36,7 @@ var User = sequelize.define('user', {
     getterMethods: {
         to_dict: function() {
             return {
-                id: this.id.toString(),
+                id: this.id,
                 name: this.name
             }
         }
