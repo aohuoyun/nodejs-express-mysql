@@ -44,13 +44,10 @@ var updateCategoryHandler = function(req,res){
 	var name = req.body.name;
 	Category.findOne({
         where: {
-            id: id
+            name: name
         }
     }).then(function(response){
-    	if(response){
-    		var resdata = response.get('to_dict');
-    		console.log(resdata.name);
-    		if((resdata.name == name && resdata.id == id) || resdata.name != name){
+    	if((response.name == name && response.id == id) || !response){
     			Category.update({
 				    name:name
 				},{
@@ -71,16 +68,41 @@ var updateCategoryHandler = function(req,res){
 		            status_code.ERROR_CATEGORY_ADD_MSG
 		        );
     		}
-    	}else{
-    		res.make_response(
-	            status_code.ERROR_PARAM,
-	            status_code.ERROR_PARAM_MSG
-	        );
-    	}
     })
+}
+
+var delateCategoryHandler = function(req,res){
+	var id = req.body.id;
+	if(id){
+		Category.destroy({
+		    where:{
+		        id:id
+		    }
+		}).then(function(result){
+	        res.make_response(
+	            "0","删除成功"
+	        );
+		});
+	}else{
+		res.make_response(
+            "1001","类型标识不能为空"
+        );
+	}
+}
+
+var queryCategoryListHandler = function(req,res){
+	Category.findAll().then(function(response){
+		if(response){
+			res.make_response(
+	            "0","查询成功",response
+	        );
+		}
+	});
 }
 
 router.post('/addCategory', addCategoryHandler);
 router.post('/updateCategory', updateCategoryHandler);
+router.post('/delateCategory', delateCategoryHandler);
+router.post('/queryCategoryList', queryCategoryListHandler);
 
 module.exports = router;

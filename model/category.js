@@ -12,15 +12,6 @@ var category = BaseModelConfig.sequelize.define('category', {
         type: BaseModelConfig.sequelizeinit.STRING(20),
         allowNull: true
     },   
-},{
-	getterMethods: {
-        to_dict: function() {
-            return {
-                id: this.id,
-                name: this.name
-            }
-        }
-    }
 });
 
 module.exports = category;
