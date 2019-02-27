@@ -5,9 +5,10 @@ var express = require('express');
 var router = express.Router();
 var status_code = require('.././helper/status_code');
 var Category = require('../.././model/category');
+var xss = require('xss');
 
 var addCategoryHandler = function(req,res){
-	var name = req.body.name || '';
+	var name = xss(req.body.name) || '';
 	if (name) {
         // 查询类型名是否已存在
         Category.findOne({
@@ -41,7 +42,7 @@ var addCategoryHandler = function(req,res){
 
 var updateCategoryHandler = function(req,res){
 	var id = req.body.id;
-	var name = req.body.name;
+	var name = xss(req.body.name);
 	Category.findOne({
         where: {
             name: name

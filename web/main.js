@@ -14,6 +14,7 @@ var config = require('.././config/config');
 var sign = require('./handler/sign_handler');
 var user = require('./handler/user_handler');
 var category = require('./handler/category_handler');
+var Article = require('./handler/article_handler');
 var app = express();
 var bodyParser = require('body-parser');
 
@@ -63,6 +64,7 @@ app.use(render);
 app.use('/', sign.routes);
 app.use('/user', user);
 app.use('/category',category);
+app.use('/article',Article);
 
 app.get("*", function(req, res) {
     res.status(404).end("404");

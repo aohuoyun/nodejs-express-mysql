@@ -7,11 +7,12 @@ var crypto = require('crypto');
 var status_code = require('.././helper/status_code');
 var uuid = require('node-uuid');
 var User = require('../.././model/user');
+var xss = require('xss');
 
 var SignUpHandler = function(req, res) {
-    var mail = req.body.mail || undefined;
-    var name = req.body.name || '';
-    var passwd = req.body.passwd || undefined;
+    var mail = xss(req.body.mail) || undefined;
+    var name = xss(req.body.name) || '';
+    var passwd = xss(req.body.passwd) || undefined;
 
     if (mail && passwd) {
         // 查询邮箱是否已存在
